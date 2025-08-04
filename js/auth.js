@@ -1,7 +1,24 @@
 // ===== AUTH FUNCTIONS =====
 
 // API Base URL - Dynamic based on environment
-const API_BASE_URL = window.API_CONFIG ? window.API_CONFIG.getApiBaseUrl() : 'http://localhost:5000/api';
+const getApiBaseUrl = () => {
+    if (window.API_CONFIG && window.API_CONFIG.getApiBaseUrl) {
+        return window.API_CONFIG.getApiBaseUrl();
+    }
+    
+    // Fallback based on current environment
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:5000/api';
+    } else {
+        return 'https://kienstore-website-production.up.railway.app/api';
+    }
+};
+
+const API_BASE_URL = getApiBaseUrl();
+
+// Debug: Log API URL
+console.log('🔗 API Base URL:', API_BASE_URL);
+console.log('🌐 Current hostname:', window.location.hostname);
 
 // Get auth token
 function getAuthToken() {
