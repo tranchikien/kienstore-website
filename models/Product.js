@@ -101,18 +101,20 @@ const productSchema = new mongoose.Schema({
         default: 0,
         min: 0
     },
+    stock: {
+        type: Number,
+        default: 0,
+        min: 0
+    },
     isSale: {
         type: Boolean,
         default: false
     },
     salePercentage: {
         type: Number,
+        default: 0,
         min: 0,
-        max: 100,
-        default: 0
-    },
-    saleEndDate: {
-        type: Date
+        max: 100
     },
     isFeatured: {
         type: Boolean,
@@ -126,34 +128,16 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    stock: {
-        type: Number,
-        default: 0,
-        min: 0
+    isBestSeller: {
+        type: Boolean,
+        default: false
     },
     isActive: {
         type: Boolean,
         default: true
-    },
-    views: {
-        type: Number,
-        default: 0
-    },
-    sales: {
-        type: Number,
-        default: 0
     }
 }, {
     timestamps: true
-});
-
-// Index for search functionality
-productSchema.index({ 
-    name: 'text', 
-    description: 'text', 
-    category: 'text',
-    developer: 'text',
-    publisher: 'text'
 });
 
 // Virtual for sale price
@@ -164,19 +148,19 @@ productSchema.virtual('salePrice').get(function() {
     return this.price;
 });
 
+// Virtual for current price
+productSchema.virtual('currentPrice').get(function() {
+    return this.isSale ? this.salePrice : this.price;
+});
+
 // Method to check if product is on sale
 productSchema.methods.isOnSale = function() {
-    if (!this.isSale) return false;
-    if (this.saleEndDate && new Date() > this.saleEndDate) return false;
-    return true;
+    return this.isSale && this.salePercentage > 0;
 };
 
 // Method to get current price
 productSchema.methods.getCurrentPrice = function() {
-    if (this.isOnSale()) {
-        return this.salePrice;
-    }
-    return this.price;
+    return this.isOnSale() ? this.salePrice : this.price;
 };
 
 // Ensure virtual fields are serialized
