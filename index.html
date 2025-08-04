@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <!-- Brand -->
-            <a class="navbar-brand d-flex align-items-center" href="#" onclick="showHomePage()">
+            <a class="navbar-brand d-flex align-items-center" href="#" onclick="showPage('home')">
                 <div class="brand-logo me-2">
                     <i class="fas fa-gamepad text-orange"></i>
                 </div>
@@ -96,13 +96,13 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main-menu-link" href="#" onclick="showAllGames()">All Games</a>
+                        <a class="nav-link main-menu-link" href="#" onclick="showPage('all-games')">All Games</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main-menu-link" href="#" onclick="showSaleGames()">Sale</a>
+                        <a class="nav-link main-menu-link" href="#" onclick="showPage('sale-games-section')">Sale</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main-menu-link" href="#" onclick="showContactPage()">Contact</a>
+                        <a class="nav-link main-menu-link" href="#" onclick="showPage('contact-page')">Contact</a>
                     </li>
                 </ul>
 
@@ -137,13 +137,13 @@
                         <i class="fas fa-user me-1"></i> <span id="user-name">ACCOUNT</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="#" onclick="showProfilePage()">
+                        <li><a class="dropdown-item" href="#" onclick="showPage('profile-page')">
                                 <i class="fas fa-user me-2"></i>Profile
                             </a></li>
-                        <li><a class="dropdown-item" href="#" onclick="showWishlist()">
+                        <li><a class="dropdown-item" href="#" onclick="showPage('wishlist-page')">
                                 <i class="fas fa-heart me-2"></i>Wishlist
                             </a></li>
-                        <li><a class="dropdown-item" href="#" onclick="showOrderHistory()">
+                        <li><a class="dropdown-item" href="#" onclick="showPage('order-history-page')">
                                 <i class="fas fa-box me-2"></i>Orders
                             </a></li>
                         <li>
@@ -193,7 +193,7 @@
         <div class="container">
             <ol class="breadcrumb mb-0 py-2" id="breadcrumb-nav">
                 <li class="breadcrumb-item">
-                    <a href="#" class="text-orange text-decoration-none" onclick="showHomePage()">
+                    <a href="#" class="text-orange text-decoration-none" onclick="showPage('home')">
                         <i class="fas fa-home me-1"></i>Home
                     </a>
                 </li>
@@ -298,7 +298,7 @@
                 <p class="lead text-light mb-4">Register now to receive offers and get the latest game updates!</p>
                 <button class="btn btn-orange btn-lg me-2" onclick="openModal('registerModal')"><i
                         class="fas fa-user-plus me-2"></i>Register now</button>
-                <button class="btn btn-outline-light btn-lg" onclick="showAllGames()"><i
+                <button class="btn btn-outline-light btn-lg" onclick="showPage('all-games')"><i
                         class="fas fa-th-large me-2"></i>View all games</button>
             </div>
 
@@ -310,7 +310,7 @@
 
 
         <!-- All Games -->
-        <section id="all-games" class="py-5 bg-dark">
+        <section id="all-games" class="py-5 bg-dark" style="display:none;">
             <div class="container">
                 <div class="section-title text-center mb-5">
                     <h2><i class="fas fa-th-large text-orange me-2"></i>All Games</h2>
@@ -379,8 +379,8 @@
                     </div>
         </section>
 
-        <!-- Filtered Games Section -->
-        <section class="py-5" id="filtered-games-section" style="display:none;">
+        <!-- Filtered Games Section (Dùng chung cho các loại lọc, ví dụ: Hot Deals, New Releases) -->
+        <section class="py-5 bg-dark" id="filtered-games-section" style="display:none;">
             <div class="container">
                 <div id="filtered-games-title" class="section-title text-center mb-3"></div>
                 <div id="filtered-games-desc" class="text-center mb-4"></div>
@@ -388,8 +388,25 @@
             </div>
         </section>
 
+        <!-- Sale Games Section (Mới: Tách riêng cho Sale để dễ quản lý) -->
+        <section class="py-5 bg-dark" id="sale-games-section" style="display:none;">
+            <div class="container">
+                <div class="section-title text-center mb-5">
+                    <h2><i class="fas fa-percentage text-danger me-2"></i>Sale Games</h2>
+                    <p class="text-light">Don't miss out on these amazing discounts!</p>
+                </div>
+                <div class="row" id="sale-games-list">
+                    <!-- Sale games will be populated here -->
+                </div>
+                <div class="text-center mt-4">
+                    <p class="text-muted">More sales coming soon!</p>
+                </div>
+            </div>
+        </section>
+
+
         <!-- Profile Page -->
-        <section id="profile-page" class="py-5" style="display:none;">
+        <section id="profile-page" class="py-5 bg-dark" style="display:none;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
@@ -461,7 +478,7 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-orange">
-                                        <i class="fas fa-key me-2"></i>Change Password
+                                        <i class="fas fa-save me-2"></i>Update information
                                     </button>
                                 </form>
                             </div>
@@ -472,7 +489,7 @@
         </section>
 
         <!-- Contact Page -->
-        <section id="contact-page" class="py-5" style="display:none;">
+        <section id="contact-page" class="py-5 bg-dark" style="display:none;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
@@ -564,7 +581,7 @@
         </section>
 
         <!-- Cart Page -->
-        <section id="cart-page" class="py-5" style="display:none;">
+        <section id="cart-page" class="py-5 bg-dark" style="display:none;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
@@ -578,7 +595,7 @@
                                         <i class="fas fa-shopping-cart text-muted mb-3" style="font-size: 3rem;"></i>
                                         <h5 class="text-light mb-2">Your Cart is Empty</h5>
                                         <p class="text-muted mb-4">You don't have any products in your cart</p>
-                                        <button class="btn btn-orange" onclick="showAllGames()">
+                                        <button class="btn btn-orange" onclick="showPage('all-games')">
                                             <i class="fas fa-shopping-bag me-2"></i>Continue Shopping
                                         </button>
                                     </div>
@@ -640,7 +657,7 @@
         </section>
 
         <!-- Wishlist Page -->
-        <section id="wishlist-page" class="py-5" style="display:none;">
+        <section id="wishlist-page" class="py-5 bg-dark" style="display:none;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 mx-auto">
@@ -654,7 +671,7 @@
                                         <i class="fas fa-heart text-muted mb-3" style="font-size: 3rem;"></i>
                                         <h5 class="text-light mb-2">Your Wishlist is Empty</h5>
                                         <p class="text-muted mb-4">Start adding games to your wishlist to track them</p>
-                                        <button class="btn btn-orange" onclick="showAllGames()">
+                                        <button class="btn btn-orange" onclick="showPage('all-games')">
                                             <i class="fas fa-gamepad me-2"></i>Browse Games
                                         </button>
                                     </div>
@@ -670,7 +687,7 @@
         </section>
 
         <!-- Order History Page -->
-        <section id="order-history-page" class="py-5" style="display:none;">
+        <section id="order-history-page" class="py-5 bg-dark" style="display:none;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 mx-auto">
@@ -704,7 +721,7 @@
         </section>
 
         <!-- Product Detail Page -->
-        <section id="product-detail-page" class="py-5" style="display:none;">
+        <section id="product-detail-page" class="py-5 bg-dark" style="display:none;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
@@ -819,7 +836,7 @@
     </main>
 
     <!-- About Section (Giới thiệu) -->
-    <section id="about" class="py-5 bg-gradient-section">
+    <section id="about" class="py-5 bg-gradient-section" style="display:none;">
         <div class="container">
             <div class="section-header text-center mb-5">
                 <h2 class="section-title">
@@ -1387,7 +1404,7 @@
                                         <h5 class="text-muted mb-2">No Orders Yet</h5>
                                         <p class="text-muted mb-4">Your order history will appear here once you make
                                             your first purchase</p>
-                                        <button class="btn btn-orange" onclick="showGamesPage()">
+                                        <button class="btn btn-orange" onclick="showPage('all-games')">
                                             <i class="fas fa-gamepad me-2"></i>Start Shopping
                                         </button>
                                     </div>
@@ -1481,7 +1498,7 @@
     </div>
 
     <!-- Admin Panel -->
-    <section id="admin-panel" class="py-5" style="display:none;">
+    <section id="admin-panel" class="py-5 bg-dark" style="display:none;">
         <div class="container">
             <!-- Admin Header -->
             <div class="row mb-4">
@@ -1489,16 +1506,16 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h2 class="text-orange"><i class="fas fa-cogs me-2"></i>Admin Dashboard</h2>
                         <div class="btn-group" role="group">
-                            <button class="btn btn-outline-orange" onclick="showAdminDashboard()">
+                            <button class="btn btn-outline-orange" onclick="showAdminSection('dashboard')">
                                 <i class="fas fa-chart-bar me-1"></i>Dashboard
                             </button>
-                            <button class="btn btn-outline-orange" onclick="showAdminProducts()">
+                            <button class="btn btn-outline-orange" onclick="showAdminSection('products')">
                                 <i class="fas fa-box me-1"></i>Products
                             </button>
-                            <button class="btn btn-outline-orange" onclick="showAdminUsers()">
+                            <button class="btn btn-outline-orange" onclick="showAdminSection('users')">
                                 <i class="fas fa-users me-1"></i>Users
                             </button>
-                            <button class="btn btn-outline-orange" onclick="showAdminOrders()">
+                            <button class="btn btn-outline-orange" onclick="showAdminSection('orders')">
                                 <i class="fas fa-shopping-cart me-1"></i>Orders
                             </button>
                         </div>
