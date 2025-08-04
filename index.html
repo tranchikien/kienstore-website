@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIENSTORE - Cửa hàng game trực tuyến</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand d-flex align-items-center" href="#" onclick="showHomePage()">
+                <div class="brand-logo me-2">
+                    <i class="fas fa-gamepad text-orange"></i>
+                </div>
+                <span class="fw-bold text-orange brand-text">KIENSTORE</span>
+            </a>
+
+            <!-- Hamburger Menu Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Collapsible Menu -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Mega Menu -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item dropdown position-static">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-th-large me-1"></i>Categories
+                        </a>
+                        <div class="dropdown-menu mega-menu w-100">
+                            <div class="container">
+                                <div class="row g-4">
+                                    <div class="col-md-3">
+                                        <h6 class="text-orange mb-3">Action & Adventure</h6>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Action')">Action Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Adventure')">Adventure Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('RPG')">RPG Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Horror')">Horror Games</a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6 class="text-orange mb-3">Strategy & Sports</h6>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Strategy')">Strategy Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Sports')">Sports Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Racing')">Racing Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Simulation')">Simulation</a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6 class="text-orange mb-3">Multiplayer</h6>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('FPS')">FPS Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('MOBA')">MOBA Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Battle Royale')">Battle Royale</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Puzzle')">Puzzle Games</a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6 class="text-orange mb-3">Special Offers</h6>
+                                        <a href="#" class="dropdown-item" onclick="showSaleGames()">
+                                            <i class="fas fa-percentage text-danger me-2"></i>Sale Games
+                                        </a>
+                                        <a href="#" class="dropdown-item" onclick="showHotDeals()">
+                                            <i class="fas fa-fire text-warning me-2"></i>Hot Deals
+                                        </a>
+                                        <a href="#" class="dropdown-item" onclick="showComingSoonGames()">
+                                            <i class="fas fa-clock text-info me-2"></i>Coming Soon
+                                        </a>
+                                        <a href="#" class="dropdown-item" onclick="showNewReleases()">
+                                            <i class="fas fa-star text-success me-2"></i>New Releases
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link main-menu-link" href="#" onclick="showAllGames()">All Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link main-menu-link" href="#" onclick="showSaleGames()">Sale</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link main-menu-link" href="#" onclick="showContactPage()">Contact</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="d-flex align-items-center flex-column flex-lg-row">
+                <!-- Search Bar -->
+                <div class="search-container me-3">
+                    <div class="input-group">
+                        <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search games...">
+                        <button class="btn btn-outline-light btn-sm" type="button" onclick="searchGames(event)">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div id="searchSuggestions" class="search-suggestions"></div>
+                </div>
+
+                <!-- User Actions -->
+                <button class="btn btn-outline-light btn-sm me-2 hover-lift" onclick="openModal('loginModal')" id="login-btn">
+                    <i class="fas fa-sign-in-alt me-1"></i> LOGIN
+                </button>
+                <button class="btn btn-outline-light btn-sm me-2 hover-lift" onclick="openModal('registerModal')" id="register-btn">
+                    <i class="fas fa-user-plus me-1"></i> REGISTER
+                </button>
+                
+                <!-- User Dropdown -->
+                <div class="dropdown me-2" id="user-dropdown" style="display:none;">
+                    <button class="btn btn-orange btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user me-1"></i> <span id="user-name">ACCOUNT</span>
+                </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#" onclick="showProfilePage()">
+                            <i class="fas fa-user me-2"></i>Profile
+                        </a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showWishlist()">
+                            <i class="fas fa-heart me-2"></i>Wishlist
+                        </a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showOrderHistory()">
+                            <i class="fas fa-box me-2"></i>Orders
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#" onclick="logout()">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </a></li>
+                    </ul>
+                </div>
+
+                <!-- Cart Dropdown -->
+                <div class="dropdown me-2">
+                    <button class="btn btn-orange btn-sm position-relative dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cartDropdown">
+                    <i class="fas fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge" id="cart-count" style="display:none;">0</span>
+                </button>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark cart-dropdown" style="width: 350px;">
+                        <h6 class="dropdown-header">Shopping Cart</h6>
+                        <div id="cart-dropdown-items" class="cart-dropdown-items">
+                            <!-- Cart items will be populated here -->
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="d-flex justify-content-between align-items-center px-3 py-2">
+                            <span>Total: <strong id="cart-dropdown-total">0 VNĐ</strong></span>
+                            <button class="btn btn-orange btn-sm" onclick="openModal('cartModal')">View Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Back to Top Button -->
+                <button class="btn btn-outline-light btn-sm" id="backToTop" onclick="scrollToTop()" style="display:none;">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    </nav>
+    <!-- Xóa nav.main-menu cũ ở đây -->
+
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb" class="bg-dark border-bottom border-secondary" style="margin-top: 76px;">
+        <div class="container">
+            <ol class="breadcrumb mb-0 py-2" id="breadcrumb-nav">
+                <li class="breadcrumb-item">
+                    <a href="#" class="text-orange text-decoration-none" onclick="showHomePage()">
+                        <i class="fas fa-home me-1"></i>Home
+                    </a>
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <section id="home" class="hero-section">
+            <!-- Parallax Hero Banner -->
+            <div id="parallaxHeroBanner" class="parallax-hero-banner position-relative overflow-hidden" style="height: 80vh; min-height: 600px;"></div>
+
+            <!-- Slider/banner quảng cáo nổi bật -->
+            <div id="home-promo-slider" class="container my-5">
+                <div class="promo-slider bg-dark rounded shadow p-4 position-relative overflow-hidden">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h2 class="text-orange mb-3"><i class="fas fa-bolt me-2"></i>SUMMER SUPER DEAL 2024!</h2>
+                            <p class="lead text-light mb-4">Discounts up to <span class="fw-bold text-warning">70%</span> on hundreds of hot games. Top up to receive gifts, buy games to get authentic keys!</p>
+                            <button class="btn btn-orange btn-lg me-2">View Deals</button>
+                            <button class="btn btn-outline-light btn-lg">Subscribe</button>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Promo" style="max-width: 180px;" class="promo-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ưu đãi hôm nay -->
+            <div id="home-today-deals" class="container my-5">
+                <div class="section-title text-center mb-4">
+                    <h2><i class="fas fa-fire text-danger me-2"></i>Today's Deals</h2>
+                    <p class="text-light">Grab shocking deals, limited quantity!</p>
+                </div>
+                <div class="row" id="today-deals-list"></div>
+            </div>
+
+            <!-- Game bán chạy -->
+            <div id="home-best-sellers" class="container my-5">
+                <div class="section-title text-center mb-4">
+                    <h2><i class="fas fa-trophy text-warning me-2"></i>Best Sellers</h2>
+                    <p class="text-light">Top favorite and most purchased games</p>
+                </div>
+                <div class="row" id="best-sellers-list"></div>
+            </div>
+
+            <!-- Lý do chọn KIENSTORE -->
+            <div id="home-why-choose" class="container my-5">
+                <div class="section-title text-center mb-4">
+                    <h2><i class="fas fa-thumbs-up text-success me-2"></i>Why choose KIENSTORE</h2>
+                </div>
+                <div class="row text-center g-4">
+                    <div class="col-md-3">
+                        <div class="why-card p-4 bg-dark rounded shadow h-100">
+                            <i class="fas fa-shield-alt fa-2x text-orange mb-3"></i>
+                            <h5 class="mb-2">Authentic Key</h5>
+                            <p class="text-muted">100% licensed products, lifetime warranty.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="why-card p-4 bg-dark rounded shadow h-100">
+                            <i class="fas fa-rocket fa-2x text-orange mb-3"></i>
+                            <h5 class="mb-2">Super Fast Delivery</h5>
+                            <p class="text-muted">Receive key immediately after successful payment.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="why-card p-4 bg-dark rounded shadow h-100">
+                            <i class="fas fa-headset fa-2x text-orange mb-3"></i>
+                            <h5 class="mb-2">24/7 Support</h5>
+                            <p class="text-muted">Professional support team, always ready to help.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="why-card p-4 bg-dark rounded shadow h-100">
+                            <i class="fas fa-gift fa-2x text-orange mb-3"></i>
+                            <h5 class="mb-2">Many Attractive Offers</h5>
+                            <p class="text-muted">Gifts, discounts, events every month.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback khách hàng -->
+            <div id="home-feedback" class="container my-5">
+                <div class="section-title text-center mb-4">
+                    <h2><i class="fas fa-comment-dots text-info me-2"></i>What do customers say?</h2>
+                </div>
+                <div class="row justify-content-center" id="feedback-list"></div>
+            </div>
+
+            <!-- CTA nổi bật -->
+            <div id="home-cta" class="container my-5 text-center">
+                <h2 class="mb-3 text-orange">Ready to experience the authentic game store?</h2>
+                <p class="lead text-light mb-4">Register now to receive offers and get the latest game updates!</p>
+                <button class="btn btn-orange btn-lg me-2" onclick="openModal('registerModal')"><i class="fas fa-user-plus me-2"></i>Register now</button>
+                <button class="btn btn-outline-light btn-lg" onclick="showAllGames()"><i class="fas fa-th-large me-2"></i>View all games</button>
+            </div>
+
+            <!-- Hiệu ứng nền/trang trí (có thể là các icon game động hoặc hình nền mờ) -->
+            <div id="home-bg-decor" class="position-absolute w-100" style="top:0;left:0;pointer-events:none;z-index:0;"></div>
+        </section>
+
+     
+
+        <!-- All Games -->
+        <section id="all-games" class="py-5 bg-dark">
+            <div class="container">
+                <div class="section-title text-center mb-5">
+                    <h2><i class="fas fa-th-large text-orange me-2"></i>All Games</h2>
+                     <p></p>
+                <div>
+
+                <!-- Filters -->
+                <div class="filters-section mb-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select id="categoryFilter" class="form-select" onchange="applyFilters()">
+                                <option value="">All Categories</option>
+                                <option value="Action">Action</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="RPG">RPG</option>
+                                <option value="Strategy">Strategy</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Racing">Racing</option>
+                                <option value="Simulation">Simulation</option>
+                                <option value="Puzzle">Puzzle</option>
+                                <option value="Horror">Horror</option>
+                                <option value="FPS">FPS</option>
+                                <option value="MOBA">MOBA</option>
+                                <option value="Battle Royale">Battle Royale</option>
+                                <option value="Sandbox">Sandbox</option>
+                                <option value="Entertainment">Entertainment</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="platformFilter" class="form-select" onchange="applyFilters()">
+                                <option value="">All Platforms</option>
+                                <option value="Steam">Steam</option>
+                                <option value="Epic Games">Epic Games</option>
+                                <option value="Origin">Origin</option>
+                                <option value="Uplay">Uplay</option>
+                                <option value="GOG">GOG</option>
+                                <option value="Battle.net">Battle.net</option>
+                                <option value="Riot Games">Riot Games</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" id="searchInput" class="form-control" placeholder="Search game...">
+                                <button class="btn btn-orange" type="button" onclick="searchGames(event)">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Games Grid -->
+                <div class="row" id="games-grid">
+                    <!-- Games will be populated here -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-section text-center mt-5">
+                    <nav>
+                        <ul class="pagination justify-content-center" id="pagination">
+                            <!-- Pagination will be generated here -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtered Games Section -->
+        <section class="py-5" id="filtered-games-section" style="display:none;">
+            <div class="container">
+                <div id="filtered-games-title" class="section-title text-center mb-3"></div>
+                <div id="filtered-games-desc" class="text-center mb-4"></div>
+                <div class="row" id="filtered-games-list"></div>
+            </div>
+        </section>
+
+        <!-- Profile Page -->
+        <section id="profile-page" class="py-5" style="display:none;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card bg-dark text-white">
+                            <div class="card-header bg-orange text-white">
+                                <h4><i class="fas fa-user me-2"></i>Personal
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 text-center mb-4">
+                                        <div class="profile-avatar">
+                                            <img src="https://via.placeholder.com/150x150?text=Avatar" alt="Avatar"
+                                                class="rounded-circle img-fluid mb-3">
+                                            <h5 id="profile-username"></h5>
+                                            <p class="text-muted">Thành viên</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <form id="profile-form">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Full Name</label>
+                                                    <input type="text" class="form-control" id="profile-fullname"
+                                                        value="Nguyễn Văn A">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Phone</label>
+                                                    <input type="tel" class="form-control" id="profile-phone"
+                                                        value="0123456789">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Address</label>
+                                                <textarea class="form-control" id="profile-address"
+                                                    rows="2"></textarea>    
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Birthday</label>
+                                                <input type="date" class="form-control" id="profile-birthday"
+                                                    value="1990-01-01">
+                                            </div>
+                                            <button type="submit" class="btn btn-orange">
+                                                <i class="fas fa-save me-2"></i>Update information
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Change Password Section -->
+                        <div class="card bg-dark text-white mt-4">
+                            <div class="card-header bg-orange text-white">
+                                <h4><i class="fas fa-key me-2"></i>Change Password</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="change-password-form">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Current Password</label>
+                                            <input type="password" class="form-control" id="current-password">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">New Password</label>
+                                            <input type="password" class="form-control" id="new-password">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Confirm New Password</label>
+                                            <input type="password" class="form-control" id="confirm-new-password">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-orange">
+                                        <i class="fas fa-key me-2"></i>Change Password
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact-page" class="py-5" style="display:none;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card bg-dark text-white">
+                            <div class="card-header bg-orange text-white">
+                                <h4><i class="fas fa-envelope me-2"></i>Contact Us</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form id="contact-form">
+                                            <div class="mb-3">
+                                                    <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" id="contact-name" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="contact-email" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Subject</label>
+                                                <select class="form-select" id="contact-subject">
+                                                    <option value="general">General</option>
+                                                    <option value="support">Technical Support</option>
+                                                    <option value="billing">Billing</option>
+                                                    <option value="feedback">Feedback</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Content</label>
+                                                <textarea class="form-control" id="contact-message" rows="5"
+                                                    required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-orange">
+                                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="contact-info">
+                                            <h5 class="text-orange mb-4">Contact Information</h5>
+                                            <div class="d-flex mb-3">
+                                                <i class="fas fa-map-marker-alt text-orange me-3 mt-1"></i>
+                                                <div>
+                                                    <strong>Address:</strong><br>
+                                                    123 Đường ABC, Quận XYZ, TP. Hà Nội
+                                                </div>
+                                            </div>
+                                            <div class="d-flex mb-3">
+                                                <i class="fas fa-phone text-orange me-3 mt-1"></i>
+                                                <div>
+                                                    <strong>Phone:</strong><br>
+                                                    +84 123 456 789
+                                                </div>
+                                            </div>
+                                            <div class="d-flex mb-3">
+                                                <i class="fas fa-envelope text-orange me-3 mt-1"></i>
+                                                <div>
+                                                    <strong>Email:</strong><br>
+                                                    info@kienstore.com
+                                                </div>
+                                            </div>
+                                            <div class="d-flex mb-4">
+                                                <i class="fas fa-clock text-orange me-3 mt-1"></i>
+                                                <div>
+                                                    <strong>Working Hours:</strong><br>
+                                                    Monday - Sunday: 8:00 - 22:00
+                                                </div>
+                                            </div>
+                                            <div class="social-links">
+                                                <h6 class="text-orange mb-3">Follow Us</h6>
+                                                <a href="#" class="btn btn-outline-orange me-2"><i
+                                                        class="fab fa-facebook"></i></a>
+                                                <a href="#" class="btn btn-outline-orange me-2"><i
+                                                        class="fab fa-twitter"></i></a>
+                                                <a href="#" class="btn btn-outline-orange me-2"><i
+                                                        class="fab fa-instagram"></i></a>
+                                                <a href="#" class="btn btn-outline-orange"><i
+                                                        class="fab fa-youtube"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Page -->
+        <section id="cart-page" class="py-5" style="display:none;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card bg-dark text-white">
+                            <div class="card-header bg-orange text-white">
+                                <h4><i class="fas fa-shopping-cart me-2"></i>Your Cart</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="cart-page-empty" style="display:none;">
+                                    <div class="text-center py-5">
+                                        <i class="fas fa-shopping-cart text-muted mb-3" style="font-size: 3rem;"></i>
+                                        <h5 class="text-light mb-2">Your Cart is Empty</h5>
+                                        <p class="text-muted mb-4">You don't have any products in your cart</p>
+                                        <button class="btn btn-orange" onclick="showAllGames()">
+                                            <i class="fas fa-shopping-bag me-2"></i>Continue Shopping
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="cart-page-items">
+                                    <!-- Cart items will be populated here -->
+                                </div>
+                                <div class="cart-summary mt-4" id="cart-summary" style="display:none;">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Subtotal:</span>
+                                                <span id="cart-subtotal">0 VNĐ</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Shipping:</span>
+                                                <span>Free</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Discount:</span>
+                                                <span id="cart-discount">0 VNĐ</span>
+                                            </div>
+                                            <hr>
+                                            <div class="d-flex justify-content-between fw-bold">
+                                                <span>Total:</span>
+                                                <span id="cart-page-total">0 VNĐ</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Coupon Code</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="coupon-input" placeholder="Enter coupon code">
+                                                    <button class="btn btn-outline-orange" type="button" onclick="applyCoupon()">
+                                                        <i class="fas fa-tag me-1"></i>Apply
+                                                    </button>
+                                                </div>
+                                                <div id="coupon-message" class="form-text"></div>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-outline-secondary" onclick="clearCart()">
+                                                <i class="fas fa-trash me-2"></i>Delete all
+                                            </button>
+                                                <button class="btn btn-orange" id="cart-checkout-btn" onclick="handleCheckout()">
+                                                <i class="fas fa-credit-card me-2"></i>Checkout
+                                            </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wishlist Page -->
+        <section id="wishlist-page" class="py-5" style="display:none;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="card bg-dark text-white">
+                            <div class="card-header bg-orange text-white">
+                                <h4><i class="fas fa-heart me-2"></i>My Wishlist</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="wishlist-empty" style="display:none;">
+                                    <div class="text-center py-5">
+                                        <i class="fas fa-heart text-muted mb-3" style="font-size: 3rem;"></i>
+                                        <h5 class="text-light mb-2">Your Wishlist is Empty</h5>
+                                        <p class="text-muted mb-4">Start adding games to your wishlist to track them</p>
+                                        <button class="btn btn-orange" onclick="showAllGames()">
+                                            <i class="fas fa-gamepad me-2"></i>Browse Games
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="wishlist-items" class="row">
+                                    <!-- Wishlist items will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order History Page -->
+        <section id="order-history-page" class="py-5" style="display:none;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="card bg-dark text-white">
+                            <div class="card-header bg-orange text-white">
+                                <h4><i class="fas fa-box me-2"></i>Order History</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Date</th>
+                                                <th>Games</th>
+                                                <th>Total</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="order-history-list">
+                                            <!-- Order history will be populated here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Detail Page -->
+        <section id="product-detail-page" class="py-5" style="display:none;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card bg-dark text-white">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="product-images">
+                                            <img id="product-main-image" src="" alt="Product"
+                                                class="img-fluid rounded mb-3">
+                                            <div class="row g-2">
+                                                <div class="col-4">
+                                                    <img id="product-thumb-1" src="" alt="Thumbnail 1"
+                                                        class="img-fluid rounded cursor-pointer">
+                                                </div>
+                                                <div class="col-4">
+                                                    <img id="product-thumb-2" src="" alt="Thumbnail 2"
+                                                        class="img-fluid rounded cursor-pointer">
+                                                </div>
+                                                <div class="col-4">
+                                                    <img id="product-thumb-3" src="" alt="Thumbnail 3"
+                                                        class="img-fluid rounded cursor-pointer">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h2 id="product-title" class="text-white mb-3"></h2>
+                                        <div class="product-meta mb-3">
+                                            <span class="badge bg-orange me-2" id="product-category"></span>
+                                            <span class="badge bg-secondary" id="product-platform"></span>
+                                        </div>
+                                        <div class="price-section mb-4">
+                                            <h3 class="text-orange fw-bold" id="product-price"></h3>
+                                        </div>
+                                        <div class="action-buttons mb-4">
+                                            <button class="btn btn-orange btn-lg me-3 hover-lift w-100 mb-2" id="product-add-to-cart">
+                                                <i class="fas fa-cart-plus me-2"></i>Thêm vào giỏ hàng
+                                            </button>
+                                            <button class="btn btn-outline-light btn-lg hover-lift w-100 mb-2" id="product-add-to-wishlist">
+                                                <i class="fas fa-heart me-2"></i>Yêu thích
+                                            </button>
+                                            <button class="btn btn-outline-orange btn-lg hover-lift w-100" id="product-price-alert">
+                                                <i class="fas fa-bell me-2"></i>Thông báo giảm giá
+                                            </button>
+                                        </div>
+                                        <div class="product-description">
+                                            <h6 class="text-orange mb-2">Description</h6>
+                                            <p id="product-description" class="text-light"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Product Details -->
+                                <div class="product-details mt-5">
+                                    <h5 class="text-orange mb-3">Product Details</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Developer:</strong> <span id="product-developer"></span></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Publisher:</strong> <span id="product-publisher"></span></p>
+                                            </p>
+                                            <p><strong>Size:</strong> <span id="product-size"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Screenshots -->
+                                <div class="product-screenshots mt-5">
+                                    <h5 class="text-orange mb-3">Game Screenshots</h5> 
+                                    <div class="row" id="product-screenshots">
+                                        <!-- Screenshots will be populated here -->
+                                    </div>
+                                </div>
+
+                                <!-- System Requirements -->
+                                <div class="system-requirements mt-5">
+                                    <h5 class="text-orange mb-3">System Requirements</h5>                                      
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-white mb-3">Minimum Requirements</h6>
+                                            <div id="min-requirements">
+                                                <!-- Minimum requirements will be populated here -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-white mb-3">Recommended Requirements</h6>
+                                            <div id="recommended-requirements">
+                                                <!-- Recommended requirements will be populated here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Reviews -->
+                                <div class="product-reviews mt-5">
+                                    <h5 class="text-orange mb-3">User Reviews</h5>
+                                    <div id="product-reviews">
+                                        <!-- Reviews will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- About Section (Giới thiệu) -->
+    <section id="about" class="py-5 bg-gradient-section">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">
+                    <i class="fas fa-store-alt text-orange me-2"></i>About KIENSTORE
+                </h2>
+                <p class="section-subtitle text-light">KIENSTORE is the best online game store in Vietnam, providing
+                    the best quality licensed games at the best price. We commit to providing a safe, fast and 24/7
+                    support experience for all gamers.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-check"></i>
+                        </div>
+                            <h5 class="feature-title">Trust & Safety</h5>
+                        <p class="feature-desc">100%
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h5 class="feature-title">Fast Product Delivery</h5>
+                        <p class="feature-desc">Key game is sent immediately after successful payment.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h5 class="feature-title">24/7 Support</h5>
+                        <p class="feature-desc">Professional support team, ready to support customers at any time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-orange mb-3">KIENSTORE</h5> 
+                    <p class="text-light">The best online game store in Vietnam, providing the best quality licensed games at the best price.</p>
+                    <div class="social-links mb-3">
+                        <a href="#" class="text-orange me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-orange me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-orange me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-orange"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="mb-2">
+                        <span class="text-muted">Đối tác:</span>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Steam_Logo.png" alt="Steam"
+                            style="height:28px;" class="mx-1">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.png" alt="Epic"
+                            style="height:28px;" class="mx-1">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/PlayStation_logo.svg" alt="PS"
+                            style="height:28px;" class="mx-1">
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="text-orange mb-3">Categories</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light text-decoration-none">Action</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Adventure</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">RPG</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Strategy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="text-orange mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light text-decoration-none">Help Center</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Contact</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">FAQ</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Report</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h6 class="text-orange mb-3">Contact</h6>
+                    <p class="text-light mb-2"><i class="fas fa-map-marker-alt text-orange me-2"></i>123 Đường ABC, Quận
+                        XYZ, TP. Hà Nội</p>
+                    <p class="text-light mb-2"><i class="fas fa-phone text-orange me-2"></i>+84 123 456 789</p>
+                    <p class="text-light mb-2"><i class="fas fa-envelope text-orange me-2"></i>info@kienstore.com</p>
+                    <div class="mt-4">
+                        <h6 class="text-orange mb-2">Subscribe to our newsletter</h6>
+                        <form class="d-flex newsletter-form"
+                            onsubmit="event.preventDefault(); showToast('Đăng ký nhận tin thành công!', 'success');">
+                            <input type="email" class="form-control me-2" placeholder="Nhập email của bạn" required
+                                style="max-width: 220px;">
+                            <button class="btn btn-orange" type="submit"><i class="fas fa-paper-plane me-1"></i>Subscribe
+                        </form>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-muted">Payment:</span>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa"
+                            style="height:24px;" class="mx-1">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png"
+                            alt="Mastercard" style="height:24px;" class="mx-1">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Former_PayPal_Logo.svg"
+                            alt="PayPal" style="height:24px;" class="mx-1">
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-muted mb-0">&copy; 2024 KIENSTORE. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="text-muted mb-0">
+                        <a href="#" class="text-muted text-decoration-none me-3">Terms of Service</a>
+                        <a href="#" class="text-muted text-decoration-none">Privacy Policy</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title"><i class="fas fa-sign-in-alt text-orange me-2"></i>Login</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-orange w-100">Login</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p class="text-muted">Don't have an account?
+                            <a href="#" onclick="switchModal('loginModal', 'registerModal')" class="text-orange">Register
+                                now</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title"><i class="fas fa-user-plus text-orange me-2"></i>Register</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="registerUsername" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="registerPhone" placeholder="Enter your phone number">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Birthday</label>
+                            <input type="date" class="form-control" id="registerBirthday">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <textarea class="form-control" id="registerAddress" rows="2" placeholder="Enter your address"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Enter your password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">
+                                I agree to the <a href="#" class="text-orange">Terms of Service</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-orange w-100">Register</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p class="text-muted">Already have an account?
+                            <a href="#" onclick="switchModal('registerModal', 'loginModal')" class="text-orange">Login now</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title"><i class="fas fa-shopping-cart text-orange me-2"></i>Cart</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-empty" style="display:none;">
+                        <div class="text-center py-4">
+                            <i class="fas fa-shopping-cart text-muted mb-3" style="font-size: 3rem;"></i>
+                            <h6 class="text-light">Cart is empty</h6>
+                            <p class="text-muted">You don't have any products in your cart</p>
+                        </div>
+                    </div>
+                    <div id="cart-items-container">
+                        <!-- Cart items will be populated here -->
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <div>
+                            <strong>Total: <span id="cart-total" class="text-orange">0 VNĐ</span></strong>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-orange" id="checkout-btn"
+                                onclick="handleCheckout()">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Detail Modal -->
+    <div class="modal fade" id="gameDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title" id="gameDetailTitle"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="gameDetailContent">
+                    <!-- Game detail content will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-circle text-orange me-2"></i>Account Profile
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <!-- Profile Header -->
+                    <div class="profile-header bg-gradient-dark p-4 text-center">
+                        <div class="profile-avatar-container mb-3">
+                            <div class="profile-avatar-wrapper">
+                                <img src="https://via.placeholder.com/120x120?text=Avatar" 
+                                     id="modal-profile-avatar-img" alt="Avatar" 
+                                     class="profile-avatar">
+                                <div class="avatar-overlay">
+                                    <label for="modal-profile-avatar" class="avatar-upload-btn">
+                                        <i class="fas fa-camera"></i>
+                                    </label>
+                                </div>
+                            </div>
+                            <input type="file" class="d-none" id="modal-profile-avatar" accept="image/*">
+                        </div>
+                        <h4 id="profile-display-name" class="mb-1">User Name</h4>
+                        <p class="text-muted mb-0">
+                            <i class="fas fa-envelope me-1"></i>
+                            <span id="profile-display-email">user@email.com</span>
+                        </p>
+                    </div>
+
+                    <!-- Navigation Tabs -->
+                    <div class="profile-nav-container">
+                        <ul class="nav nav-tabs nav-fill" id="profileTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info"
+                                        type="button" role="tab">
+                                    <i class="fas fa-user me-2"></i>Personal Info
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password"
+                                    type="button" role="tab">
+                                    <i class="fas fa-lock me-2"></i>Security
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment"
+                                    type="button" role="tab">
+                                    <i class="fas fa-credit-card me-2"></i>Payment
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders"
+                                    type="button" role="tab">
+                                    <i class="fas fa-shopping-bag me-2"></i>Orders
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content p-4">
+                        <!-- Personal Information Tab -->
+                        <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                            <form id="profileInfoForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">
+                                            <i class="fas fa-user me-1"></i>Full Name
+                                        </label>
+                                        <input type="text" class="form-control form-control-lg" 
+                                               id="modal-profile-fullname" placeholder="Enter your full name">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">
+                                            <i class="fas fa-phone me-1"></i>Phone Number
+                                        </label>
+                                        <input type="tel" class="form-control form-control-lg" 
+                                               id="modal-profile-phone" placeholder="Enter your phone number">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        <i class="fas fa-envelope me-1"></i>Email Address
+                                    </label>
+                                    <input type="email" class="form-control form-control-lg" 
+                                           id="modal-profile-email" disabled>
+                                    <small class="text-muted">Email cannot be changed</small>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">
+                                            <i class="fas fa-birthday-cake me-1"></i>Birthday
+                                        </label>
+                                        <input type="date" class="form-control form-control-lg" 
+                                               id="modal-profile-birthday">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">
+                                            <i class="fas fa-map-marker-alt me-1"></i>Location
+                                        </label>
+                                        <select class="form-control form-control-lg" id="modal-profile-location">
+                                            <option value="">Select your city</option>
+                                            <option value="hanoi">Hà Nội</option>
+                                            <option value="hcm">TP. Hồ Chí Minh</option>
+                                            <option value="danang">Đà Nẵng</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label">
+                                        <i class="fas fa-home me-1"></i>Default Address
+                                    </label>
+                                    <textarea class="form-control" id="modal-profile-address" 
+                                              rows="3" placeholder="Enter your full address"></textarea>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button type="submit" class="btn btn-orange btn-lg">
+                                        <i class="fas fa-save me-2"></i>Save Changes
+                                    </button>
+                                    <small class="text-muted">Last updated: <span id="last-updated">Never</span></small>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Security Tab -->
+                        <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                            <form id="profilePasswordForm">
+                                <div class="security-info mb-4">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-shield-alt me-2"></i>
+                                        <strong>Password Requirements:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li>At least 8 characters</li>
+                                            <li>One uppercase letter</li>
+                                            <li>One lowercase letter</li>
+                                            <li>One number</li>
+                                            <li>One special character</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        <i class="fas fa-key me-1"></i>Current Password
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <input type="password" class="form-control" id="modal-current-password"
+                                            placeholder="Enter your current password">
+                                        <button class="btn btn-outline-secondary toggle-password" type="button"
+                                            onclick="togglePasswordVisibility('modal-current-password', this)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        <i class="fas fa-lock me-1"></i>New Password
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <input type="password" class="form-control" id="modal-new-password"
+                                            placeholder="Enter new password">
+                                        <button class="btn btn-outline-secondary toggle-password" type="button"
+                                            onclick="togglePasswordVisibility('modal-new-password', this)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div class="password-strength mt-2" id="password-strength"></div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label">
+                                        <i class="fas fa-check-circle me-1"></i>Confirm New Password
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <input type="password" class="form-control" id="modal-confirm-new-password"
+                                            placeholder="Confirm new password">
+                                        <button class="btn btn-outline-secondary toggle-password" type="button"
+                                            onclick="togglePasswordVisibility('modal-confirm-new-password', this)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div id="password-error-msg" class="alert alert-danger" style="display:none;"></div>
+                                
+                                <button type="submit" class="btn btn-orange btn-lg w-100">
+                                    <i class="fas fa-key me-2"></i>Update Password
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Payment Tab -->
+                        <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                            <form id="profilePaymentForm">
+                                <div class="payment-methods mb-4">
+                                    <h6 class="mb-3">
+                                        <i class="fas fa-credit-card me-2"></i>Payment Methods
+                                    </h6>
+                                    
+                                    <!-- Credit Card Section -->
+                                    <div class="card bg-dark border-secondary mb-3">
+                                        <div class="card-header bg-gradient-dark">
+                                            <h6 class="mb-0">
+                                                <i class="fab fa-cc-visa me-2 text-primary"></i>Credit/Debit Card
+                                            </h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Card Number</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">
+                                                            <i class="fab fa-cc-visa"></i>
+                                                        </span>
+                                                        <input type="text" class="form-control" id="modal-visa-card"
+                                                            placeholder="1234 5678 9012 3456" maxlength="19">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <label class="form-label">Cardholder Name</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-user"></i>
+                                                        </span>
+                                                        <input type="text" class="form-control" id="modal-visa-name"
+                                                            placeholder="JOHN DOE">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Expiry Date</label>
+                                                    <input type="text" class="form-control" id="modal-visa-expiry"
+                                                        placeholder="MM/YY" maxlength="5">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">CVV</label>
+                                                    <input type="text" class="form-control" id="modal-visa-cvv"
+                                                        placeholder="123" maxlength="4">
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-outline-orange w-100">
+                                                <i class="fas fa-link me-2"></i>Link Card
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Digital Wallets -->
+                                    <div class="card bg-dark border-secondary">
+                                        <div class="card-header bg-gradient-dark">
+                                            <h6 class="mb-0">
+                                                <i class="fas fa-wallet me-2 text-success"></i>Digital Wallets
+                                            </h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row g-2">
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-outline-success w-100">
+                                                        <i class="fab fa-google-pay me-2"></i>Google Pay
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-outline-primary w-100">
+                                                        <i class="fab fa-apple-pay me-2"></i>Apple Pay
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Orders Tab -->
+                        <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                            <div class="orders-container">
+                                <div class="text-center py-5">
+                                    <div class="empty-state">
+                                        <i class="fas fa-shopping-bag fa-4x text-muted mb-3"></i>
+                                        <h5 class="text-muted mb-2">No Orders Yet</h5>
+                                        <p class="text-muted mb-4">Your order history will appear here once you make your first purchase</p>
+                                        <button class="btn btn-orange" onclick="showGamesPage()">
+                                            <i class="fas fa-gamepad me-2"></i>Start Shopping
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-danger" onclick="logout()">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Detail Modal for Cart -->
+    <div class="modal fade" id="cartOrderDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title"><i class="fas fa-receipt text-orange me-2"></i>Order Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="cart-order-detail-content">
+                    <!-- Nội dung chi tiết đơn hàng sẽ được render bằng JS -->
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;"></div>
+
+    <!-- Live Chat Widget -->
+    <div id="live-chat-widget" class="position-fixed bottom-0 end-0 m-3" style="z-index: 1040;">
+        <div id="chat-toggle" class="btn btn-orange rounded-circle" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);">
+            <i class="fas fa-comments" style="font-size: 1.5rem;"></i>
+        </div>
+        <div id="chat-window" class="card bg-dark text-white" style="width: 350px; height: 400px; position: absolute; bottom: 70px; right: 0; display: none; border: 1px solid #444;">
+            <div class="card-header bg-orange text-white d-flex justify-content-between align-items-center">
+                <h6 class="mb-0"><i class="fas fa-headset me-2"></i>Live Support</h6>
+                <button class="btn btn-sm btn-outline-light" onclick="toggleChat()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="card-body p-0">
+                <div id="chat-messages" class="p-3" style="height: 300px; overflow-y: auto;">
+                    <div class="text-center text-muted">
+                        <i class="fas fa-robot mb-2" style="font-size: 2rem;"></i>
+                        <p>Chào mừng bạn đến với KIENSTORE!</p>
+                        <p>Chúng tôi sẽ hỗ trợ bạn trong thời gian sớm nhất.</p>
+                    </div>
+                </div>
+                <div class="p-3 border-top">
+                    <div class="input-group">
+                        <input type="text" id="chat-input" class="form-control" placeholder="Nhập tin nhắn...">
+                        <button class="btn btn-orange" onclick="sendChatMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="js/auth.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/games.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Remove Confirm Modal for Cart -->
+    <div class="modal fade" id="cartRemoveConfirmModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title"><i class="fas fa-trash-alt text-danger me-2"></i>Confirm Product Removal</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="cart-remove-confirm-content">
+                    <!-- Nội dung xác nhận sẽ được render bằng JS -->
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="cart-remove-confirm-btn">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <section id="admin-panel" class="py-5" style="display:none;">
+        <div class="container">
+            <!-- Admin Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="text-orange"><i class="fas fa-cogs me-2"></i>Admin Dashboard</h2>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-outline-orange" onclick="showAdminDashboard()">
+                                <i class="fas fa-chart-bar me-1"></i>Dashboard
+                            </button>
+                            <button class="btn btn-outline-orange" onclick="showAdminProducts()">
+                                <i class="fas fa-box me-1"></i>Products
+                            </button>
+                            <button class="btn btn-outline-orange" onclick="showAdminUsers()">
+                                <i class="fas fa-users me-1"></i>Users
+                            </button>
+                            <button class="btn btn-outline-orange" onclick="showAdminOrders()">
+                                <i class="fas fa-shopping-cart me-1"></i>Orders
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div id="admin-dashboard" class="row mb-4">
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-dark text-white">
+                        <div class="card-body text-center">
+                            <i class="fas fa-box fa-3x text-orange mb-3"></i>
+                            <h3 id="dashboard-total-products">0</h3>
+                            <p class="text-muted">Total Products</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-dark text-white">
+                        <div class="card-body text-center">
+                            <i class="fas fa-users fa-3x text-orange mb-3"></i>
+                            <h3 id="dashboard-total-users">0</h3>
+                            <p class="text-muted">Total Users</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card bg-dark text-white">
+                        <div class="card-body text-center">
+                            <i class="fas fa-shopping-cart fa-3x text-orange mb-3"></i>
+                            <h3 id="dashboard-total-orders">0</h3>
+                            <p class="text-muted">Total Orders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Management -->
+            <div id="admin-products" class="row" style="display:none;">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-orange"><i class="fas fa-box me-2"></i>Product Management</h3>
+                        <div class="d-flex gap-2 align-items-center">
+                            <input type="text" class="form-control" id="product-admin-search" placeholder="Search game name..."
+                                style="max-width:200px;">
+                            <button class="btn btn-orange" onclick="openProductFormModal()">
+                                <i class="fas fa-plus me-2"></i>Add Product
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Category</th>
+                                    <th>Platform</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="product-admin-list">
+                                <!-- Products will be rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <nav>
+                            <ul class="pagination pagination-sm mb-0" id="product-admin-pagination">
+                                <!-- Pagination will be rendered by JS -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Management -->
+            <div id="admin-users" class="row" style="display:none;">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-orange"><i class="fas fa-users me-2"></i>User Management</h3>
+                        <div class="d-flex gap-2 align-items-center">
+                            <input type="text" class="form-control" id="user-admin-search" placeholder="Search user..."
+                                style="max-width:200px;">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Phone</th>
+                                    <th>Joined</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-admin-list">
+                                <!-- Users will be rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <nav>
+                            <ul class="pagination pagination-sm mb-0" id="user-admin-pagination">
+                                <!-- Pagination will be rendered by JS -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Management -->
+            <div id="admin-orders" class="row" style="display:none;">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-orange"><i class="fas fa-shopping-cart me-2"></i>Order Management</h3>
+                        <div class="d-flex gap-2 align-items-center">
+                            <select class="form-select" id="order-status-filter" style="max-width:150px;">
+                                <option value="">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Items</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Payment</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="order-admin-list">
+                                <!-- Orders will be rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <nav>
+                            <ul class="pagination pagination-sm mb-0" id="order-admin-pagination">
+                                <!-- Pagination will be rendered by JS -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal Thêm/Sửa sản phẩm -->
+    <div class="modal fade" id="productFormModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title" id="productFormModalTitle">Add Product</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="productForm">
+                        <input type="hidden" id="product-id">
+                        <div class="mb-3">
+                            <label class="form-label">Game Name</label>
+                            <input type="text" class="form-control" id="product-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price</label>
+                            <input type="number" class="form-control" id="product-price" required min="0">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <input type="text" class="form-control" id="product-category" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Platform</label>
+                            <input type="text" class="form-control" id="product-platform" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Image (URL or upload)</label>
+                            <input type="text" class="form-control mb-2" id="product-image"
+                                placeholder="Paste image URL or select file">
+                            <input type="file" class="form-control" id="product-image-file" accept="image/*">
+                            <div class="mt-2 text-center">
+                                <img id="product-image-preview" src="" alt="Preview"
+                                    style="max-width:120px;max-height:80px;display:none;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="product-description" rows="2" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-orange w-100">Save Product
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal xác nhận xóa sản phẩm -->
+    <div class="modal fade" id="productDeleteModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title"><i class="fas fa-trash-alt text-danger me-2"></i>Confirm Product Removal</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="product-delete-content">
+                    <!-- Nội dung xác nhận sẽ được render bằng JS -->
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="product-delete-confirm-btn">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Checkout Modal -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title">
+                        <i class="fas fa-credit-card text-orange me-2"></i>Order Payment
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="demoCheckoutForm">
+                    <div class="modal-body">
+                        <!-- User Info Section -->
+                        <div class="checkout-user-info mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-user me-2"></i>Thông tin tài khoản
+                                </h6>
+                                <button type="button" class="btn btn-outline-orange btn-sm" onclick="fillFromProfile()">
+                                    <i class="fas fa-sync-alt me-1"></i>Lấy từ Profile
+                                </button>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <i class="fas fa-user me-1"></i>Họ và tên
+                                    </label>
+                                    <input type="text" class="form-control form-control-lg" id="checkout-name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <i class="fas fa-phone me-1"></i>Số điện thoại
+                                    </label>
+                                    <input type="tel" class="form-control form-control-lg" id="checkout-phone" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    <i class="fas fa-envelope me-1"></i>Email
+                                </label>
+                                <input type="email" class="form-control form-control-lg" id="checkout-email" required>
+                            </div>
+                            
+
+                        </div>
+
+                        <!-- Payment Method Section -->
+                        <div class="checkout-payment-method mb-4">
+                            <h6 class="mb-3">
+                                <i class="fas fa-credit-card me-2"></i>Phương thức thanh toán
+                            </h6>
+                            
+                            <div class="row">
+                                <div class="col-md-8 mb-3">
+                                    <select class="form-select form-select-lg" id="checkout-method" required>
+                                        <option value="">Chọn phương thức thanh toán</option>
+                                        <option value="bank">🏦 Chuyển khoản ngân hàng</option>
+                                        <option value="momo">💜 Ví Momo</option>
+                                        <option value="zalopay">💙 ZaloPay</option>
+                                        <option value="visa">💳 Thẻ Visa/MasterCard</option>
+                                        <option value="paypal">💳 PayPal</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="payment-method-info">
+                                        <small class="text-muted">
+                                            <i class="fas fa-shield-alt me-1"></i>Thanh toán an toàn
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Summary Section -->
+                        <div class="checkout-order-summary mb-4">
+                            <h6 class="mb-3">
+                                <i class="fas fa-shopping-cart me-2"></i>Tóm tắt đơn hàng
+                            </h6>
+                            <div class="card bg-dark border-secondary">
+                                <div class="card-body">
+                                    <div id="checkout-order-items">
+                                        <!-- Order items will be populated here -->
+                                    </div>
+                                    <hr class="border-secondary">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold">Tổng cộng:</span>
+                                        <span class="fw-bold text-orange" id="checkout-total">0 VNĐ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Game Delivery Info -->
+                        <div class="alert alert-info mb-3">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Thông tin nhận game:</strong>
+                            <ul class="mb-0 mt-2">
+                                <li>Game sẽ được gửi qua email sau khi thanh toán thành công</li>
+                                <li>Mã game/Key sẽ được gửi trong vòng 5-10 phút</li>
+                                <li>Vui lòng kiểm tra email (cả spam folder)</li>
+                            </ul>
+                        </div>
+
+                        <!-- Additional Notes -->
+                        <div class="mb-3">
+                            <label class="form-label">
+                                <i class="fas fa-sticky-note me-1"></i>Ghi chú (tuỳ chọn)
+                            </label>
+                            <textarea class="form-control" id="checkout-note" rows="2" 
+                                      placeholder="Ghi chú về đơn hàng..."></textarea>
+                        </div>
+
+                        <!-- Auto-fill notification -->
+                        <div id="checkout-auto-fill-notice" class="alert alert-success" style="display: none;">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Thông tin đã được tự động điền từ profile!</strong>
+                            <br>
+                            <small>Game sẽ được gửi qua email sau khi thanh toán thành công.</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-secondary">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-1"></i>Huỷ
+                        </button>
+                        <button type="submit" class="btn btn-orange btn-lg">
+                            <i class="fas fa-credit-card me-2"></i>Xác nhận thanh toán
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
