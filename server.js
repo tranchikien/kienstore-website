@@ -18,8 +18,15 @@ const orderRoutes = require('./routes/orders');
 // Middleware
 app.use(helmet());
 app.use(cors({
-    origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:3000', 'https://kienstore-website.vercel.app'],
-    credentials: true
+    origin: [
+        'http://localhost:3000',
+        'http://localhost:5000',
+        'https://kienstore-website.vercel.app',
+        'https://kienstore-website-project.vercel.app'
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Rate limiting
