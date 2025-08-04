@@ -20,15 +20,13 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "https://kienstore-backend-production.up.railway.app/api/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/$1"
     }
   ],
-  "env": {
-    "API_BASE_URL": "https://kienstore-backend-production.up.railway.app/api"
+  "functions": {
+    "api/**/*.js": {
+      "maxDuration": 10
+    }
   }
 } 
