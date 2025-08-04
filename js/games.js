@@ -1,7 +1,7 @@
 // ===== GAME FUNCTIONS =====
 
-// API Base URL
-const API_BASE_URL = 'http://localhost:5000/api';
+// API Base URL - Dynamic based on environment
+const API_BASE_URL = window.API_CONFIG ? window.API_CONFIG.getApiBaseUrl() : 'http://localhost:5000/api';
 
 // Global games data
 let gamesData = [];
