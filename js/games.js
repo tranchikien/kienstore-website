@@ -48,15 +48,25 @@ function renderGames(games = gamesData) {
  * Hiển thị tất cả game
  */
 async function showAllGames() {
+    console.log('🔍 showAllGames() called');
+    
     hideAllPages();
-    document.getElementById('all-games').style.display = 'block';
+    const allGamesSection = document.getElementById('all-games');
+    if (!allGamesSection) {
+        console.error('❌ all-games section not found');
+        return;
+    }
+    allGamesSection.style.display = 'block';
     
     // Load games from API if not already loaded
     if (gamesData.length === 0) {
+        console.log('📥 Loading games from API...');
         await loadGamesFromAPI();
     }
     
-    console.log('All Games Data:', gamesData); // Debug log
+    console.log('🎮 All Games Data:', gamesData.length, 'games');
+    console.log('🎮 Games:', gamesData);
+    
     renderGames(gamesData); // Render tất cả game
     scrollToTop();
     setActiveMenu('home');
@@ -416,11 +426,29 @@ function handleProductDelete() {
 }
 
 // Hiển thị game đang SALE
-function showSaleGames() {
+async function showSaleGames() {
+    console.log('🏷️ showSaleGames() called');
+    
     hideAllPages();
-    document.getElementById('all-games').style.display = 'block';
-    const games = getAllGamesData().filter(g => g.isSale || (g.sale && g.sale > 0));
-    renderGames(games);
+    const allGamesSection = document.getElementById('all-games');
+    if (!allGamesSection) {
+        console.error('❌ all-games section not found');
+        return;
+    }
+    allGamesSection.style.display = 'block';
+    
+    // Load games from API if not already loaded
+    if (gamesData.length === 0) {
+        console.log('📥 Loading games from API...');
+        await loadGamesFromAPI();
+    }
+    
+    // Filter sale games
+    const saleGames = gamesData.filter(g => g.isSale || (g.salePercentage && g.salePercentage > 0));
+    console.log('🏷️ Sale Games:', saleGames.length, 'games');
+    console.log('🏷️ Sale Games Data:', saleGames);
+    
+    renderGames(saleGames);
     scrollToTop();
     setActiveMenu('sale');
 }

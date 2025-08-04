@@ -545,10 +545,27 @@ function initAdminPanel() {
 
 // Show admin panel
 function showAdminPanel() {
+    console.log('🔧 showAdminPanel() called');
+    
+    // Check if user is admin
+    if (!isAdmin()) {
+        showToast('Bạn không có quyền truy cập Admin Panel!', 'error');
+        return;
+    }
+    
     hideAllPages();
-    document.getElementById('admin-panel').style.display = 'block';
+    const adminPanel = document.getElementById('admin-panel');
+    if (!adminPanel) {
+        console.error('❌ admin-panel section not found');
+        showToast('Admin Panel không khả dụng!', 'error');
+        return;
+    }
+    
+    adminPanel.style.display = 'block';
     initAdminPanel();
+    showAdminDashboard(); // Show dashboard by default
     scrollToTop();
+    console.log('✅ Admin Panel displayed');
 }
 
 // Admin panel navigation functions

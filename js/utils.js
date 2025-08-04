@@ -29,7 +29,7 @@ function openCheckoutModal() {
     const user = getCurrentUser();
     if (user) {
         fillFromProfile();
-        showToast('Thông tin đã được tự động điền từ profile!', 'success');
+        // showToast('Thông tin đã được tự động điền từ profile!', 'success');
     } else {
         showToast('Vui lòng nhập thông tin thanh toán', 'info');
     }
@@ -69,7 +69,7 @@ function fillFromProfile() {
         }, 5000);
     }
     
-    showToast('Đã điền thông tin từ profile!', 'success');
+    // showToast('Đã điền thông tin từ profile!', 'success');
 }
 
 /**
@@ -280,7 +280,7 @@ function showProfilePage() {
     }
     
     openModal('profileModal');
-    showToast('Profile page opened', 'info');
+    // showToast('Profile page opened', 'info');
 }
 
 /**
@@ -291,7 +291,7 @@ function showContactPage() {
     document.getElementById('contact-page').style.display = 'block';
     updateBreadcrumbForPage('Contact');
     scrollToTop();
-    showToast('Đã mở trang liên hệ', 'info');
+    // showToast('Đã mở trang liên hệ', 'info');
 }
 
 /**
@@ -308,7 +308,7 @@ function showCartPage() {
     updateCartPage();
     updateBreadcrumbForPage('Shopping Cart');
     scrollToTop();
-    showToast('Đã mở trang giỏ hàng', 'info');
+    // showToast('Đã mở trang giỏ hàng', 'info');
 }
 
 /**
@@ -337,7 +337,7 @@ function showHomePage() {
     document.getElementById('all-games').style.display = 'block';
     updateBreadcrumbForPage('Home');
     scrollToTop();
-    showToast('Đã về trang chủ', 'info');
+    // showToast('Đã về trang chủ', 'info');
 }
 
 /**
@@ -1060,7 +1060,7 @@ function showWishlist() {
     renderWishlist();
     updateBreadcrumbForPage('Wishlist');
     scrollToTop();
-    showToast('Đã mở trang wishlist', 'info');
+    // showToast('Đã mở trang wishlist', 'info');
 }
 
 /**
@@ -1133,7 +1133,7 @@ function showOrderHistory() {
     renderOrderHistory();
     updateBreadcrumbForPage('Order History');
     scrollToTop();
-    showToast('Đã mở trang lịch sử đơn hàng', 'info');
+    // showToast('Đã mở trang lịch sử đơn hàng', 'info');
 }
 
 /**
