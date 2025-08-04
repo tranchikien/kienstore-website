@@ -18,7 +18,7 @@ const orderRoutes = require('./routes/orders');
 // Middleware
 app.use(helmet());
 app.use(cors({
-    origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:3000'],
+    origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:3000', 'https://kienstore-website.vercel.app'],
     credentials: true
 }));
 
