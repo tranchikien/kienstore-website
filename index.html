@@ -27,7 +27,8 @@
             </a>
 
             <!-- Hamburger Menu Button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -44,24 +45,36 @@
                                 <div class="row g-4">
                                     <div class="col-md-3">
                                         <h6 class="text-orange mb-3">Action & Adventure</h6>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Action')">Action Games</a>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Adventure')">Adventure Games</a>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('RPG')">RPG Games</a>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Horror')">Horror Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Action')">Action
+                                            Games</a>
+                                        <a href="#" class="dropdown-item"
+                                            onclick="filterByCategory('Adventure')">Adventure Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('RPG')">RPG
+                                            Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Horror')">Horror
+                                            Games</a>
                                     </div>
                                     <div class="col-md-3">
                                         <h6 class="text-orange mb-3">Strategy & Sports</h6>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Strategy')">Strategy Games</a>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Sports')">Sports Games</a>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Racing')">Racing Games</a>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Simulation')">Simulation</a>
+                                        <a href="#" class="dropdown-item"
+                                            onclick="filterByCategory('Strategy')">Strategy Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Sports')">Sports
+                                            Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Racing')">Racing
+                                            Games</a>
+                                        <a href="#" class="dropdown-item"
+                                            onclick="filterByCategory('Simulation')">Simulation</a>
                                     </div>
                                     <div class="col-md-3">
                                         <h6 class="text-orange mb-3">Multiplayer</h6>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('FPS')">FPS Games</a>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('MOBA')">MOBA Games</a>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Battle Royale')">Battle Royale</a>
-                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Puzzle')">Puzzle Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('FPS')">FPS
+                                            Games</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('MOBA')">MOBA
+                                            Games</a>
+                                        <a href="#" class="dropdown-item"
+                                            onclick="filterByCategory('Battle Royale')">Battle Royale</a>
+                                        <a href="#" class="dropdown-item" onclick="filterByCategory('Puzzle')">Puzzle
+                                            Games</a>
                                     </div>
                                     <div class="col-md-3">
                                         <h6 class="text-orange mb-3">Special Offers</h6>
@@ -99,7 +112,8 @@
                 <!-- Search Bar -->
                 <div class="search-container me-3">
                     <div class="input-group">
-                        <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search games...">
+                        <input type="text" id="searchInput" class="form-control form-control-sm"
+                            placeholder="Search games...">
                         <button class="btn btn-outline-light btn-sm" type="button" onclick="searchGames(event)">
                             <i class="fas fa-search"></i>
                         </button>
@@ -108,41 +122,48 @@
                 </div>
 
                 <!-- User Actions -->
-                <button class="btn btn-outline-light btn-sm me-2 hover-lift" onclick="openModal('loginModal')" id="login-btn">
+                <button class="btn btn-outline-light btn-sm me-2 hover-lift" onclick="openModal('loginModal')"
+                    id="login-btn">
                     <i class="fas fa-sign-in-alt me-1"></i> LOGIN
                 </button>
-                <button class="btn btn-outline-light btn-sm me-2 hover-lift" onclick="openModal('registerModal')" id="register-btn">
+                <button class="btn btn-outline-light btn-sm me-2 hover-lift" onclick="openModal('registerModal')"
+                    id="register-btn">
                     <i class="fas fa-user-plus me-1"></i> REGISTER
                 </button>
-                
+
                 <!-- User Dropdown -->
                 <div class="dropdown me-2" id="user-dropdown" style="display:none;">
                     <button class="btn btn-orange btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
                         <i class="fas fa-user me-1"></i> <span id="user-name">ACCOUNT</span>
-                </button>
+                    </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
                         <li><a class="dropdown-item" href="#" onclick="showProfilePage()">
-                            <i class="fas fa-user me-2"></i>Profile
-                        </a></li>
+                                <i class="fas fa-user me-2"></i>Profile
+                            </a></li>
                         <li><a class="dropdown-item" href="#" onclick="showWishlist()">
-                            <i class="fas fa-heart me-2"></i>Wishlist
-                        </a></li>
+                                <i class="fas fa-heart me-2"></i>Wishlist
+                            </a></li>
                         <li><a class="dropdown-item" href="#" onclick="showOrderHistory()">
-                            <i class="fas fa-box me-2"></i>Orders
-                        </a></li>
-                        <li><hr class="dropdown-divider"></li>
+                                <i class="fas fa-box me-2"></i>Orders
+                            </a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item text-danger" href="#" onclick="logout()">
-                            <i class="fas fa-sign-out-alt me-2"></i>Logout
-                        </a></li>
+                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                            </a></li>
                     </ul>
                 </div>
 
                 <!-- Cart Dropdown -->
                 <div class="dropdown me-2">
-                    <button class="btn btn-orange btn-sm position-relative dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cartDropdown">
-                    <i class="fas fa-shopping-cart"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge" id="cart-count" style="display:none;">0</span>
-                </button>
+                    <button class="btn btn-orange btn-sm position-relative dropdown-toggle" type="button"
+                        data-bs-toggle="dropdown" id="cartDropdown">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge"
+                            id="cart-count" style="display:none;">0</span>
+                    </button>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark cart-dropdown" style="width: 350px;">
                         <h6 class="dropdown-header">Shopping Cart</h6>
                         <div id="cart-dropdown-items" class="cart-dropdown-items">
@@ -157,12 +178,13 @@
                 </div>
 
                 <!-- Back to Top Button -->
-                <button class="btn btn-outline-light btn-sm" id="backToTop" onclick="scrollToTop()" style="display:none;">
+                <button class="btn btn-outline-light btn-sm" id="backToTop" onclick="scrollToTop()"
+                    style="display:none;">
                     <i class="fas fa-arrow-up"></i>
                 </button>
             </div>
         </div>
-    </div>
+        </div>
     </nav>
     <!-- Xóa nav.main-menu cũ ở đây -->
 
@@ -184,7 +206,8 @@
         <!-- Home Page -->
         <section id="home" class="hero-section">
             <!-- Parallax Hero Banner -->
-            <div id="parallaxHeroBanner" class="parallax-hero-banner position-relative overflow-hidden" style="height: 80vh; min-height: 600px;"></div>
+            <div id="parallaxHeroBanner" class="parallax-hero-banner position-relative overflow-hidden"
+                style="height: 80vh; min-height: 600px;"></div>
 
             <!-- Slider/banner quảng cáo nổi bật -->
             <div id="home-promo-slider" class="container my-5">
@@ -192,12 +215,15 @@
                     <div class="row align-items-center">
                         <div class="col-md-8">
                             <h2 class="text-orange mb-3"><i class="fas fa-bolt me-2"></i>SUMMER SUPER DEAL 2024!</h2>
-                            <p class="lead text-light mb-4">Discounts up to <span class="fw-bold text-warning">70%</span> on hundreds of hot games. Top up to receive gifts, buy games to get authentic keys!</p>
+                            <p class="lead text-light mb-4">Discounts up to <span
+                                    class="fw-bold text-warning">70%</span> on hundreds of hot games. Top up to receive
+                                gifts, buy games to get authentic keys!</p>
                             <button class="btn btn-orange btn-lg me-2">View Deals</button>
                             <button class="btn btn-outline-light btn-lg">Subscribe</button>
                         </div>
                         <div class="col-md-4 text-center">
-                            <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Promo" style="max-width: 180px;" class="promo-img">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Promo"
+                                style="max-width: 180px;" class="promo-img">
                         </div>
                     </div>
                 </div>
@@ -270,83 +296,87 @@
             <div id="home-cta" class="container my-5 text-center">
                 <h2 class="mb-3 text-orange">Ready to experience the authentic game store?</h2>
                 <p class="lead text-light mb-4">Register now to receive offers and get the latest game updates!</p>
-                <button class="btn btn-orange btn-lg me-2" onclick="openModal('registerModal')"><i class="fas fa-user-plus me-2"></i>Register now</button>
-                <button class="btn btn-outline-light btn-lg" onclick="showAllGames()"><i class="fas fa-th-large me-2"></i>View all games</button>
+                <button class="btn btn-orange btn-lg me-2" onclick="openModal('registerModal')"><i
+                        class="fas fa-user-plus me-2"></i>Register now</button>
+                <button class="btn btn-outline-light btn-lg" onclick="showAllGames()"><i
+                        class="fas fa-th-large me-2"></i>View all games</button>
             </div>
 
             <!-- Hiệu ứng nền/trang trí (có thể là các icon game động hoặc hình nền mờ) -->
-            <div id="home-bg-decor" class="position-absolute w-100" style="top:0;left:0;pointer-events:none;z-index:0;"></div>
+            <div id="home-bg-decor" class="position-absolute w-100" style="top:0;left:0;pointer-events:none;z-index:0;">
+            </div>
         </section>
 
-     
+
 
         <!-- All Games -->
         <section id="all-games" class="py-5 bg-dark">
             <div class="container">
                 <div class="section-title text-center mb-5">
                     <h2><i class="fas fa-th-large text-orange me-2"></i>All Games</h2>
-                     <p></p>
-                <div>
+                    <p></p>
+                    <div>
 
-                <!-- Filters -->
-                <div class="filters-section mb-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <select id="categoryFilter" class="form-select" onchange="applyFilters()">
-                                <option value="">All Categories</option>
-                                <option value="Action">Action</option>
-                                <option value="Adventure">Adventure</option>
-                                <option value="RPG">RPG</option>
-                                <option value="Strategy">Strategy</option>
-                                <option value="Sports">Sports</option>
-                                <option value="Racing">Racing</option>
-                                <option value="Simulation">Simulation</option>
-                                <option value="Puzzle">Puzzle</option>
-                                <option value="Horror">Horror</option>
-                                <option value="FPS">FPS</option>
-                                <option value="MOBA">MOBA</option>
-                                <option value="Battle Royale">Battle Royale</option>
-                                <option value="Sandbox">Sandbox</option>
-                                <option value="Entertainment">Entertainment</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <select id="platformFilter" class="form-select" onchange="applyFilters()">
-                                <option value="">All Platforms</option>
-                                <option value="Steam">Steam</option>
-                                <option value="Epic Games">Epic Games</option>
-                                <option value="Origin">Origin</option>
-                                <option value="Uplay">Uplay</option>
-                                <option value="GOG">GOG</option>
-                                <option value="Battle.net">Battle.net</option>
-                                <option value="Riot Games">Riot Games</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <input type="text" id="searchInput" class="form-control" placeholder="Search game...">
-                                <button class="btn btn-orange" type="button" onclick="searchGames(event)">
-                                    <i class="fas fa-search"></i>
-                                </button>
+                        <!-- Filters -->
+                        <div class="filters-section mb-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select id="categoryFilter" class="form-select" onchange="applyFilters()">
+                                        <option value="">All Categories</option>
+                                        <option value="Action">Action</option>
+                                        <option value="Adventure">Adventure</option>
+                                        <option value="RPG">RPG</option>
+                                        <option value="Strategy">Strategy</option>
+                                        <option value="Sports">Sports</option>
+                                        <option value="Racing">Racing</option>
+                                        <option value="Simulation">Simulation</option>
+                                        <option value="Puzzle">Puzzle</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="FPS">FPS</option>
+                                        <option value="MOBA">MOBA</option>
+                                        <option value="Battle Royale">Battle Royale</option>
+                                        <option value="Sandbox">Sandbox</option>
+                                        <option value="Entertainment">Entertainment</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select id="platformFilter" class="form-select" onchange="applyFilters()">
+                                        <option value="">All Platforms</option>
+                                        <option value="Steam">Steam</option>
+                                        <option value="Epic Games">Epic Games</option>
+                                        <option value="Origin">Origin</option>
+                                        <option value="Uplay">Uplay</option>
+                                        <option value="GOG">GOG</option>
+                                        <option value="Battle.net">Battle.net</option>
+                                        <option value="Riot Games">Riot Games</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <input type="text" id="searchInput" class="form-control"
+                                            placeholder="Search game...">
+                                        <button class="btn btn-orange" type="button" onclick="searchGames(event)">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- Games Grid -->
+                        <div class="row" id="games-grid">
+                            <!-- Games will be populated here -->
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="pagination-section text-center mt-5">
+                            <nav>
+                                <ul class="pagination justify-content-center" id="pagination">
+                                    <!-- Pagination will be generated here -->
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Games Grid -->
-                <div class="row" id="games-grid">
-                    <!-- Games will be populated here -->
-                </div>
-
-                <!-- Pagination -->
-                <div class="pagination-section text-center mt-5">
-                    <nav>
-                        <ul class="pagination justify-content-center" id="pagination">
-                            <!-- Pagination will be generated here -->
-                        </ul>
-                    </nav>
-                </div>
-            </div>
         </section>
 
         <!-- Filtered Games Section -->
@@ -393,8 +423,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Address</label>
-                                                <textarea class="form-control" id="profile-address"
-                                                    rows="2"></textarea>    
+                                                <textarea class="form-control" id="profile-address" rows="2"></textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Birthday</label>
@@ -456,7 +485,7 @@
                                     <div class="col-md-6">
                                         <form id="contact-form">
                                             <div class="mb-3">
-                                                    <label class="form-label">Full Name</label>
+                                                <label class="form-label">Full Name</label>
                                                 <input type="text" class="form-control" id="contact-name" required>
                                             </div>
                                             <div class="mb-3">
@@ -582,8 +611,10 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Coupon Code</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="coupon-input" placeholder="Enter coupon code">
-                                                    <button class="btn btn-outline-orange" type="button" onclick="applyCoupon()">
+                                                    <input type="text" class="form-control" id="coupon-input"
+                                                        placeholder="Enter coupon code">
+                                                    <button class="btn btn-outline-orange" type="button"
+                                                        onclick="applyCoupon()">
                                                         <i class="fas fa-tag me-1"></i>Apply
                                                     </button>
                                                 </div>
@@ -591,11 +622,12 @@
                                             </div>
                                             <div class="d-flex gap-2">
                                                 <button class="btn btn-outline-secondary" onclick="clearCart()">
-                                                <i class="fas fa-trash me-2"></i>Delete all
-                                            </button>
-                                                <button class="btn btn-orange" id="cart-checkout-btn" onclick="handleCheckout()">
-                                                <i class="fas fa-credit-card me-2"></i>Checkout
-                                            </button>
+                                                    <i class="fas fa-trash me-2"></i>Delete all
+                                                </button>
+                                                <button class="btn btn-orange" id="cart-checkout-btn"
+                                                    onclick="handleCheckout()">
+                                                    <i class="fas fa-credit-card me-2"></i>Checkout
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -709,13 +741,16 @@
                                             <h3 class="text-orange fw-bold" id="product-price"></h3>
                                         </div>
                                         <div class="action-buttons mb-4">
-                                            <button class="btn btn-orange btn-lg me-3 hover-lift w-100 mb-2" id="product-add-to-cart">
+                                            <button class="btn btn-orange btn-lg me-3 hover-lift w-100 mb-2"
+                                                id="product-add-to-cart">
                                                 <i class="fas fa-cart-plus me-2"></i>Thêm vào giỏ hàng
                                             </button>
-                                            <button class="btn btn-outline-light btn-lg hover-lift w-100 mb-2" id="product-add-to-wishlist">
+                                            <button class="btn btn-outline-light btn-lg hover-lift w-100 mb-2"
+                                                id="product-add-to-wishlist">
                                                 <i class="fas fa-heart me-2"></i>Yêu thích
                                             </button>
-                                            <button class="btn btn-outline-orange btn-lg hover-lift w-100" id="product-price-alert">
+                                            <button class="btn btn-outline-orange btn-lg hover-lift w-100"
+                                                id="product-price-alert">
                                                 <i class="fas fa-bell me-2"></i>Thông báo giảm giá
                                             </button>
                                         </div>
@@ -743,7 +778,7 @@
 
                                 <!-- Screenshots -->
                                 <div class="product-screenshots mt-5">
-                                    <h5 class="text-orange mb-3">Game Screenshots</h5> 
+                                    <h5 class="text-orange mb-3">Game Screenshots</h5>
                                     <div class="row" id="product-screenshots">
                                         <!-- Screenshots will be populated here -->
                                     </div>
@@ -751,7 +786,7 @@
 
                                 <!-- System Requirements -->
                                 <div class="system-requirements mt-5">
-                                    <h5 class="text-orange mb-3">System Requirements</h5>                                      
+                                    <h5 class="text-orange mb-3">System Requirements</h5>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h6 class="text-white mb-3">Minimum Requirements</h6>
@@ -800,7 +835,7 @@
                         <div class="feature-icon">
                             <i class="fas fa-shield-check"></i>
                         </div>
-                            <h5 class="feature-title">Trust & Safety</h5>
+                        <h5 class="feature-title">Trust & Safety</h5>
                         <p class="feature-desc">100%
                     </div>
                 </div>
@@ -831,8 +866,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <h5 class="text-orange mb-3">KIENSTORE</h5> 
-                    <p class="text-light">The best online game store in Vietnam, providing the best quality licensed games at the best price.</p>
+                    <h5 class="text-orange mb-3">KIENSTORE</h5>
+                    <p class="text-light">The best online game store in Vietnam, providing the best quality licensed
+                        games at the best price.</p>
                     <div class="social-links mb-3">
                         <a href="#" class="text-orange me-3"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-orange me-3"><i class="fab fa-twitter"></i></a>
@@ -879,7 +915,8 @@
                             onsubmit="event.preventDefault(); showToast('Đăng ký nhận tin thành công!', 'success');">
                             <input type="email" class="form-control me-2" placeholder="Nhập email của bạn" required
                                 style="max-width: 220px;">
-                            <button class="btn btn-orange" type="submit"><i class="fas fa-paper-plane me-1"></i>Subscribe
+                            <button class="btn btn-orange" type="submit"><i
+                                    class="fas fa-paper-plane me-1"></i>Subscribe
                         </form>
                     </div>
                     <div class="mt-4">
@@ -921,11 +958,13 @@
                     <form id="loginForm">
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                            <input type="password" class="form-control" id="loginPassword"
+                                placeholder="Enter your password" required>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="rememberMe">
@@ -935,7 +974,8 @@
                     </form>
                     <div class="text-center mt-3">
                         <p class="text-muted">Don't have an account?
-                            <a href="#" onclick="switchModal('loginModal', 'registerModal')" class="text-orange">Register
+                            <a href="#" onclick="switchModal('loginModal', 'registerModal')"
+                                class="text-orange">Register
                                 now</a>
                         </p>
                     </div>
@@ -956,15 +996,18 @@
                     <form id="registerForm">
                         <div class="mb-3">
                             <label class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="registerUsername" placeholder="Enter your full name" required>
+                            <input type="text" class="form-control" id="registerUsername"
+                                placeholder="Enter your full name" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email" required>
+                            <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Phone</label>
-                            <input type="tel" class="form-control" id="registerPhone" placeholder="Enter your phone number">
+                            <input type="tel" class="form-control" id="registerPhone"
+                                placeholder="Enter your phone number">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Birthday</label>
@@ -972,15 +1015,18 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Address</label>
-                            <textarea class="form-control" id="registerAddress" rows="2" placeholder="Enter your address"></textarea>
+                            <textarea class="form-control" id="registerAddress" rows="2"
+                                placeholder="Enter your address"></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" id="registerPassword" placeholder="Enter your password" required>
+                            <input type="password" class="form-control" id="registerPassword"
+                                placeholder="Enter your password" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                            <input type="password" class="form-control" id="confirmPassword"
+                                placeholder="Confirm your password" required>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="agreeTerms" required>
@@ -992,7 +1038,8 @@
                     </form>
                     <div class="text-center mt-3">
                         <p class="text-muted">Already have an account?
-                            <a href="#" onclick="switchModal('registerModal', 'loginModal')" class="text-orange">Login now</a>
+                            <a href="#" onclick="switchModal('registerModal', 'loginModal')" class="text-orange">Login
+                                now</a>
                         </p>
                     </div>
                 </div>
@@ -1066,9 +1113,8 @@
                     <div class="profile-header bg-gradient-dark p-4 text-center">
                         <div class="profile-avatar-container mb-3">
                             <div class="profile-avatar-wrapper">
-                                <img src="https://via.placeholder.com/120x120?text=Avatar" 
-                                     id="modal-profile-avatar-img" alt="Avatar" 
-                                     class="profile-avatar">
+                                <img src="https://via.placeholder.com/120x120?text=Avatar" id="modal-profile-avatar-img"
+                                    alt="Avatar" class="profile-avatar">
                                 <div class="avatar-overlay">
                                     <label for="modal-profile-avatar" class="avatar-upload-btn">
                                         <i class="fas fa-camera"></i>
@@ -1088,14 +1134,14 @@
                     <div class="profile-nav-container">
                         <ul class="nav nav-tabs nav-fill" id="profileTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info"
-                                        type="button" role="tab">
+                                <button class="nav-link active" id="info-tab" data-bs-toggle="tab"
+                                    data-bs-target="#info" type="button" role="tab">
                                     <i class="fas fa-user me-2"></i>Personal Info
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password"
-                                    type="button" role="tab">
+                                <button class="nav-link" id="password-tab" data-bs-toggle="tab"
+                                    data-bs-target="#password" type="button" role="tab">
                                     <i class="fas fa-lock me-2"></i>Security
                                 </button>
                             </li>
@@ -1124,34 +1170,34 @@
                                         <label class="form-label">
                                             <i class="fas fa-user me-1"></i>Full Name
                                         </label>
-                                        <input type="text" class="form-control form-control-lg" 
-                                               id="modal-profile-fullname" placeholder="Enter your full name">
+                                        <input type="text" class="form-control form-control-lg"
+                                            id="modal-profile-fullname" placeholder="Enter your full name">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">
                                             <i class="fas fa-phone me-1"></i>Phone Number
                                         </label>
-                                        <input type="tel" class="form-control form-control-lg" 
-                                               id="modal-profile-phone" placeholder="Enter your phone number">
+                                        <input type="tel" class="form-control form-control-lg" id="modal-profile-phone"
+                                            placeholder="Enter your phone number">
                                     </div>
                                 </div>
-                                
+
                                 <div class="mb-3">
                                     <label class="form-label">
                                         <i class="fas fa-envelope me-1"></i>Email Address
                                     </label>
-                                    <input type="email" class="form-control form-control-lg" 
-                                           id="modal-profile-email" disabled>
+                                    <input type="email" class="form-control form-control-lg" id="modal-profile-email"
+                                        disabled>
                                     <small class="text-muted">Email cannot be changed</small>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">
                                             <i class="fas fa-birthday-cake me-1"></i>Birthday
                                         </label>
-                                        <input type="date" class="form-control form-control-lg" 
-                                               id="modal-profile-birthday">
+                                        <input type="date" class="form-control form-control-lg"
+                                            id="modal-profile-birthday">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">
@@ -1166,15 +1212,15 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="mb-4">
                                     <label class="form-label">
                                         <i class="fas fa-home me-1"></i>Default Address
                                     </label>
-                                    <textarea class="form-control" id="modal-profile-address" 
-                                              rows="3" placeholder="Enter your full address"></textarea>
+                                    <textarea class="form-control" id="modal-profile-address" rows="3"
+                                        placeholder="Enter your full address"></textarea>
                                 </div>
-                                
+
                                 <div class="d-flex justify-content-between align-items-center">
                                     <button type="submit" class="btn btn-orange btn-lg">
                                         <i class="fas fa-save me-2"></i>Save Changes
@@ -1200,7 +1246,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                
+
                                 <div class="mb-3">
                                     <label class="form-label">
                                         <i class="fas fa-key me-1"></i>Current Password
@@ -1214,7 +1260,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                
+
                                 <div class="mb-3">
                                     <label class="form-label">
                                         <i class="fas fa-lock me-1"></i>New Password
@@ -1229,7 +1275,7 @@
                                     </div>
                                     <div class="password-strength mt-2" id="password-strength"></div>
                                 </div>
-                                
+
                                 <div class="mb-4">
                                     <label class="form-label">
                                         <i class="fas fa-check-circle me-1"></i>Confirm New Password
@@ -1243,9 +1289,9 @@
                                         </button>
                                     </div>
                                 </div>
-                                
+
                                 <div id="password-error-msg" class="alert alert-danger" style="display:none;"></div>
-                                
+
                                 <button type="submit" class="btn btn-orange btn-lg w-100">
                                     <i class="fas fa-key me-2"></i>Update Password
                                 </button>
@@ -1259,7 +1305,7 @@
                                     <h6 class="mb-3">
                                         <i class="fas fa-credit-card me-2"></i>Payment Methods
                                     </h6>
-                                    
+
                                     <!-- Credit Card Section -->
                                     <div class="card bg-dark border-secondary mb-3">
                                         <div class="card-header bg-gradient-dark">
@@ -1305,7 +1351,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Digital Wallets -->
                                     <div class="card bg-dark border-secondary">
                                         <div class="card-header bg-gradient-dark">
@@ -1339,7 +1385,8 @@
                                     <div class="empty-state">
                                         <i class="fas fa-shopping-bag fa-4x text-muted mb-3"></i>
                                         <h5 class="text-muted mb-2">No Orders Yet</h5>
-                                        <p class="text-muted mb-4">Your order history will appear here once you make your first purchase</p>
+                                        <p class="text-muted mb-4">Your order history will appear here once you make
+                                            your first purchase</p>
                                         <button class="btn btn-orange" onclick="showGamesPage()">
                                             <i class="fas fa-gamepad me-2"></i>Start Shopping
                                         </button>
@@ -1381,10 +1428,12 @@
 
     <!-- Live Chat Widget -->
     <div id="live-chat-widget" class="position-fixed bottom-0 end-0 m-3" style="z-index: 1040;">
-        <div id="chat-toggle" class="btn btn-orange rounded-circle" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);">
+        <div id="chat-toggle" class="btn btn-orange rounded-circle"
+            style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);">
             <i class="fas fa-comments" style="font-size: 1.5rem;"></i>
         </div>
-        <div id="chat-window" class="card bg-dark text-white" style="width: 350px; height: 400px; position: absolute; bottom: 70px; right: 0; display: none; border: 1px solid #444;">
+        <div id="chat-window" class="card bg-dark text-white"
+            style="width: 350px; height: 400px; position: absolute; bottom: 70px; right: 0; display: none; border: 1px solid #444;">
             <div class="card-header bg-orange text-white d-flex justify-content-between align-items-center">
                 <h6 class="mb-0"><i class="fas fa-headset me-2"></i>Live Support</h6>
                 <button class="btn btn-sm btn-outline-light" onclick="toggleChat()">
@@ -1411,24 +1460,13 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom JavaScript -->
-    <script src="js/auth.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/games.js"></script>
-    <script src="js/admin.js"></script>
-    <script src="js/main.js"></script>
-
     <!-- Remove Confirm Modal for Cart -->
     <div class="modal fade" id="cartRemoveConfirmModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-white">
                 <div class="modal-header border-secondary">
-                    <h5 class="modal-title"><i class="fas fa-trash-alt text-danger me-2"></i>Confirm Product Removal</h5>
+                    <h5 class="modal-title"><i class="fas fa-trash-alt text-danger me-2"></i>Confirm Product Removal
+                    </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="cart-remove-confirm-content">
@@ -1505,8 +1543,8 @@
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h3 class="text-orange"><i class="fas fa-box me-2"></i>Product Management</h3>
                         <div class="d-flex gap-2 align-items-center">
-                            <input type="text" class="form-control" id="product-admin-search" placeholder="Search game name..."
-                                style="max-width:200px;">
+                            <input type="text" class="form-control" id="product-admin-search"
+                                placeholder="Search game name..." style="max-width:200px;">
                             <button class="btn btn-orange" onclick="openProductFormModal()">
                                 <i class="fas fa-plus me-2"></i>Add Product
                             </button>
@@ -1673,7 +1711,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-white">
                 <div class="modal-header border-secondary">
-                    <h5 class="modal-title"><i class="fas fa-trash-alt text-danger me-2"></i>Confirm Product Removal</h5>
+                    <h5 class="modal-title"><i class="fas fa-trash-alt text-danger me-2"></i>Confirm Product Removal
+                    </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="product-delete-content">
@@ -1709,7 +1748,7 @@
                                     <i class="fas fa-sync-alt me-1"></i>Lấy từ Profile
                                 </button>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">
@@ -1724,14 +1763,14 @@
                                     <input type="tel" class="form-control form-control-lg" id="checkout-phone" required>
                                 </div>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <label class="form-label">
                                     <i class="fas fa-envelope me-1"></i>Email
                                 </label>
                                 <input type="email" class="form-control form-control-lg" id="checkout-email" required>
                             </div>
-                            
+
 
                         </div>
 
@@ -1740,7 +1779,7 @@
                             <h6 class="mb-3">
                                 <i class="fas fa-credit-card me-2"></i>Phương thức thanh toán
                             </h6>
-                            
+
                             <div class="row">
                                 <div class="col-md-8 mb-3">
                                     <select class="form-select form-select-lg" id="checkout-method" required>
@@ -1797,8 +1836,8 @@
                             <label class="form-label">
                                 <i class="fas fa-sticky-note me-1"></i>Ghi chú (tuỳ chọn)
                             </label>
-                            <textarea class="form-control" id="checkout-note" rows="2" 
-                                      placeholder="Ghi chú về đơn hàng..."></textarea>
+                            <textarea class="form-control" id="checkout-note" rows="2"
+                                placeholder="Ghi chú về đơn hàng..."></textarea>
                         </div>
 
                         <!-- Auto-fill notification -->
@@ -1821,6 +1860,22 @@
             </div>
         </div>
     </div>
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="js/auth.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/games.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/main.js"></script>
+
+
 </body>
 
 </html>
