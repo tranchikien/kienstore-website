@@ -4,7 +4,7 @@ const API_CONFIG = {
         baseUrl: 'http://localhost:5000/api'
     },
     production: {
-        baseUrl: 'https://kienstore-backend-production.up.railway.app/api'
+        baseUrl: 'https://[YOUR-RAILWAY-URL]/api'  // Thay thế bằng URL Railway thực tế
     }
 };
 
