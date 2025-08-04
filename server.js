@@ -99,10 +99,16 @@ app.use('*', (req, res) => {
 // Connect to MongoDB
 const connectDB = async () => {
     try {
-        const mongoURI = process.env.NODE_ENV === 'production' 
-            ? process.env.MONGODB_URI_PROD 
-            : process.env.MONGODB_URI;
-            
+        const mongoURI = process.env.MONGODB_URI;
+        
+        if (!mongoURI) {
+            throw new Error('MONGODB_URI environment variable is not set');
+        }
+        
+        console.log('🔗 Connecting to MongoDB...');
+        console.log('📱 Environment:', process.env.NODE_ENV);
+        console.log('🔑 MongoDB URI:', mongoURI.substring(0, 20) + '...');
+        
         await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
