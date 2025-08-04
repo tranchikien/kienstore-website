@@ -16,6 +16,14 @@
     {
       "src": "images/**/*",
       "use": "@vercel/static"
+    },
+    {
+      "src": "*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.css",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -23,10 +31,5 @@
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ],
-  "functions": {
-    "api/**/*.js": {
-      "maxDuration": 10
-    }
-  }
+  ]
 } 
