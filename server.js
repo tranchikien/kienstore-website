@@ -18,15 +18,10 @@ const orderRoutes = require('./routes/orders');
 // Middleware
 app.use(helmet());
 app.use(cors({
-    origin: [
-        'http://localhost:3000',
-        'http://localhost:5000',
-        'https://kienstore-website.vercel.app',
-        'https://kienstore-website-project.vercel.app'
-    ],
+    origin: true, // Allow all origins temporarily
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
 // Rate limiting
@@ -56,6 +51,9 @@ app.get('/api/health', (req, res) => {
         timestamp: new Date().toISOString()
     });
 });
+
+// Handle preflight requests
+app.options('*', cors());
 
 // Seed data endpoint (for development only)
 app.post('/api/seed', async (req, res) => {
