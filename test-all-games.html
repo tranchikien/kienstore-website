@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test All Games Function</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>Test All Games Function</h1>
+    
+    <div class="test-section info">
+        <h3>Test Steps:</h3>
+        <ol>
+            <li>Open the main website</li>
+            <li>Click on "All Games" or "Games" in the navigation</li>
+            <li>Check if games are displayed</li>
+            <li>Check console for any errors</li>
+        </ol>
+    </div>
+    
+    <div class="test-section">
+        <h3>Debug Information:</h3>
+        <div id="debug-info"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Manual Test:</h3>
+        <button onclick="testShowAllGames()">Test showAllGames()</button>
+        <button onclick="testGamesData()">Test gamesData</button>
+        <button onclick="testRenderGames()">Test renderGames()</button>
+    </div>
+
+    <script>
+        // Test functions
+        function testShowAllGames() {
+            console.log('Testing showAllGames...');
+            if (typeof showAllGames === 'function') {
+                showAllGames();
+                document.getElementById('debug-info').innerHTML += '<div class="success">✓ showAllGames function exists and called</div>';
+            } else {
+                document.getElementById('debug-info').innerHTML += '<div class="error">✗ showAllGames function not found</div>';
+            }
+        }
+        
+        function testGamesData() {
+            console.log('Testing gamesData...');
+            if (typeof gamesData !== 'undefined') {
+                document.getElementById('debug-info').innerHTML += `<div class="success">✓ gamesData exists with ${gamesData.length} items</div>`;
+                console.log('gamesData:', gamesData);
+            } else {
+                document.getElementById('debug-info').innerHTML += '<div class="error">✗ gamesData not found</div>';
+            }
+        }
+        
+        function testRenderGames() {
+            console.log('Testing renderGames...');
+            if (typeof renderGames === 'function') {
+                document.getElementById('debug-info').innerHTML += '<div class="success">✓ renderGames function exists</div>';
+            } else {
+                document.getElementById('debug-info').innerHTML += '<div class="error">✗ renderGames function not found</div>';
+            }
+        }
+        
+        // Auto test on load
+        window.addEventListener('load', function() {
+            document.getElementById('debug-info').innerHTML = '<div class="info">Page loaded, checking functions...</div>';
+            testGamesData();
+            testRenderGames();
+        });
+    </script>
+</body>
+</html> 
