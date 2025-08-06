@@ -61,7 +61,16 @@ async function showAllGames() {
     // Load games from API if not already loaded
     if (gamesData.length === 0) {
         console.log('📥 Loading games from API...');
-        await loadGamesFromAPI();
+        const apiGames = await loadGamesFromAPI();
+        if (apiGames && apiGames.length > 0) {
+            gamesData = apiGames;
+        } else {
+            // Fallback to static data from main.js
+            console.log('📦 Using static games data from main.js');
+            if (typeof window.gamesData !== 'undefined') {
+                gamesData = window.gamesData;
+            }
+        }
     }
     
     console.log('🎮 All Games Data:', gamesData.length, 'games');
@@ -234,6 +243,11 @@ function getAllGamesData() {
     // Ưu tiên lấy từ gamesData API trước
     if (typeof gamesData !== 'undefined' && Array.isArray(gamesData) && gamesData.length > 0) {
         return gamesData;
+    }
+    
+    // Fallback to static data from main.js
+    if (typeof window.gamesData !== 'undefined' && Array.isArray(window.gamesData) && window.gamesData.length > 0) {
+        return window.gamesData;
     }
     
     // Nếu không có gamesData, thử lấy từ admin_products
