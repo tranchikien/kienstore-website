@@ -4,7 +4,9 @@ let currentPage = 1;
 const itemsPerPage = 12;
 
 // ===== GAMES DATA =====
-const gamesData = [
+// Initialize gamesData with static data as fallback
+if (typeof gamesData === 'undefined') {
+    window.gamesData = [
     {
         id: 1,
         name: "Cyberpunk 2077",
@@ -605,8 +607,7 @@ const gamesData = [
         ]
     }
 ];
-
-// ===== UTILITY FUNCTIONS =====
+}
 
 /**
  * Format price to Vietnamese currency
